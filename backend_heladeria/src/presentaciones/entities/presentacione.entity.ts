@@ -6,15 +6,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
-@Entity('sabore')
-export class Sabore {
+@Entity('presentacione')
+export class Presentacione {
   @PrimaryGeneratedColumn('identity')
   id: number;
-  @Column('varchar', { length: 10, name: 'nombre' })
+  @Column('varchar', { length: 10, name: 'nombre(cono barquillo' })
   nombre: string;
-  @Column('varchar', { length: 50, name: 'descripcion' })
-  descripcion: string;
   @Column({ type: 'float' })
   precio: number;
   @CreateDateColumn({ name: 'fecha creacion' })
