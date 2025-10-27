@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TamañosService } from './tamaños.service';
 import { CreateTamañoDto } from './dto/create-tamaño.dto';
 import { UpdateTamañoDto } from './dto/update-tamaño.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('tamaños')
+@ApiTags('Tamaños')
+@Controller('tamanos')
 export class TamañosController {
   constructor(private readonly tamañosService: TamañosService) {}
 
