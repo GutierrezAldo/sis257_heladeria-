@@ -1,15 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SaboresService } from './sabores.service';
-import { CreateSaboreDto } from './dto/create-sabore.dto';
-import { UpdateSaboreDto } from './dto/update-sabore.dto';
+import { CreateSaborDto } from './dto/create-sabor.dto';
+import { UpdateSaborDto } from './dto/update-sabor.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Sabores')
 @Controller('sabores')
 export class SaboresController {
   constructor(private readonly saboresService: SaboresService) {}
 
   @Post()
-  create(@Body() createSaboreDto: CreateSaboreDto) {
-    return this.saboresService.create(createSaboreDto);
+  create(@Body() createSaborDto: CreateSaborDto) {
+    return this.saboresService.create(createSaborDto);
   }
 
   @Get()
@@ -23,8 +33,8 @@ export class SaboresController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSaboreDto: UpdateSaboreDto) {
-    return this.saboresService.update(+id, updateSaboreDto);
+  update(@Param('id') id: string, @Body() updateSaborDto: UpdateSaborDto) {
+    return this.saboresService.update(+id, updateSaborDto);
   }
 
   @Delete(':id')
