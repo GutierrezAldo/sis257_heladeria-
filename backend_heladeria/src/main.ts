@@ -13,7 +13,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('API Rest SIS257 - Heladeria')
-    .setDescription('API Rest de la materia Desarrollo de Aplicación Int/Internet II')
+    .setDescription(
+      'API Rest de la materia Desarrollo de Aplicación Int/Internet II',
+    )
     .setVersion('1.0')
     //.addTag('productos')
     .build();

@@ -7,9 +7,8 @@ import { PresentacionesModule } from './presentaciones/presentaciones.module';
 
 @Module({
   imports: [
-    
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
     }),
 
     TypeOrmModule.forRoot({
