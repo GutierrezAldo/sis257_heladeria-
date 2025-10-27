@@ -1,15 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PresentacionesService } from './presentaciones.service';
-import { CreatePresentacioneDto } from './dto/create-presentacione.dto';
-import { UpdatePresentacioneDto } from './dto/update-presentacione.dto';
+import { CreatePresentacionDto } from './dto/create-presentacion.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { UpdatePresentacionDto } from './dto/update-presentacion.dto';
 
+@ApiTags('Presentaciones')
 @Controller('presentaciones')
 export class PresentacionesController {
   constructor(private readonly presentacionesService: PresentacionesService) {}
 
   @Post()
-  create(@Body() createPresentacioneDto: CreatePresentacioneDto) {
-    return this.presentacionesService.create(createPresentacioneDto);
+  create(@Body() createPresentacionDto: CreatePresentacionDto) {
+    return this.presentacionesService.create(createPresentacionDto);
   }
 
   @Get()
@@ -23,8 +33,11 @@ export class PresentacionesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePresentacioneDto: UpdatePresentacioneDto) {
-    return this.presentacionesService.update(+id, updatePresentacioneDto);
+  update(
+    @Param('id') id: string,
+    @Body() updatePresentacionDto: UpdatePresentacionDto,
+  ) {
+    return this.presentacionesService.update(+id, updatePresentacionDto);
   }
 
   @Delete(':id')
