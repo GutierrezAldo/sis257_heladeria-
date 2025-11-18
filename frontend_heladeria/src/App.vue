@@ -1,10 +1,16 @@
 <template>
-  <DashboardLayout>
-    <RouterView />
-  </DashboardLayout>
+  <Toast position="top-right" />
+  <router-view />
 </template>
-
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import DashboardLayout from '@/layouts/DashboardLayout.vue';
+import { Toast } from 'primevue';
+
 </script>
+
+
+<style>
+@import '@/assets/css/bootstrap.min.css';
+@import '@/assets/css/style.css';
+@import '@/assets/css/responsive.css';
+@import '@/assets/css/jquery.mCustomScrollbar.min.css';
+</style>
