@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { PresentacionesService } from './presentaciones.service';
 import { CreatePresentacionDto } from './dto/create-presentacion.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpdatePresentacionDto } from './dto/update-presentacion.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Presentaciones')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('presentaciones')
 export class PresentacionesController {
   constructor(private readonly presentacionesService: PresentacionesService) {}

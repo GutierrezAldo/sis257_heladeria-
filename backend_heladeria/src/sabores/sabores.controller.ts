@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { SaboresService } from './sabores.service';
 import { CreateSaborDto } from './dto/create-sabor.dto';
 import { UpdateSaborDto } from './dto/update-sabor.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Sabores')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('sabores')
 export class SaboresController {
   constructor(private readonly saboresService: SaboresService) {}

@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { TamañosService } from './tamaños.service';
 import { CreateTamañoDto } from './dto/create-tamaño.dto';
 import { UpdateTamañoDto } from './dto/update-tamaño.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Tamaños')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('tamanos')
 export class TamañosController {
   constructor(private readonly tamañosService: TamañosService) {}
