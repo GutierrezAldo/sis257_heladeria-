@@ -1,34 +1,33 @@
-Tienda de Helados Artesanales 
-
 # 🍦 Heladería NOVA
 
-Bienvenido al repositorio oficial del sistema de gestión para la heladería **NOVA**. Sis 257 
-Este proyecto tiene como objetivo digitalizar los procesos internos del negocio, permitiendo un mejor control de productos, ventas, clientes y personal.
+Bienvenido al repositorio oficial del sistema de gestión para la heladería **NOVA**. 
+Este proyecto tiene como objetivo digitalizar los procesos internos del negocio, permitiendo un mejor control de inventario, productos, ventas, compras, clientes y personal.
 
 # 🧊 Descripción del Negocio
-Un punto de venta para una heladería, desarrollado como aplicación web.
-un POS web no solo mejora la operación diaria, sino que genera información estratégica que ayuda al dueño a tomar decisiones más inteligentes, aumentar ventas, reducir costos y mejorar la satisfacción del cliente.
-desarrollar un punto de venta web para una heladería tiene varias ventajas estratégicas y operativas
-Automatiza el registro de ventas, evitando errores de cálculo manual.
+Un punto de venta (POS) para una heladería, desarrollado como aplicación web.
+Un POS web no solo mejora la operación diaria, sino que genera información estratégica que ayuda al dueño a tomar decisiones más inteligentes, aumentar ventas, reducir costos y mejorar la satisfacción del cliente.
 
-Reduce el tiempo de atención al cliente en caja.
+Desarrollar un punto de venta web para una heladería tiene varias ventajas estratégicas y operativas:
+- Automatiza el registro de ventas, evitando errores de cálculo manual.
+- Controla el inventario de forma dinámica con cada compra y venta.
+- Reduce el tiempo de atención al cliente en caja.
+- Permite manejar múltiples pedidos simultáneamente, ideal en horas pico.
 
-Permite manejar múltiples pedidos simultáneamente, ideal en horas pico.
-
-Con La funcionalidad Principal de lograr 
-
-- El Crud de 2 Catálogos
-- Login
-- Compra o Venta
+Con la funcionalidad principal de lograr:
+- El CRUD de Catálogos (Productos, Insumos, Usuarios, Clientes, etc.)
+- Login y Control de Acceso (Roles)
+- Gestión de Compra (Abastecimiento) y Venta (Facturación)
 
 ## 🧩🥶 Entidades del Sistema
 
-### 🧁 producto ###
+### 🧁 producto
 - `id_producto (PK)`
 - `nombre`
 - `precio`
+- `stock` 
+- `estado`
 
-### ❄️ empleado ###
+### ❄️ empleado
 - `id_empleado (PK)`
 - `nombre`
 - `apellido`
@@ -36,46 +35,73 @@ Con La funcionalidad Principal de lograr
 - `teléfono`
 - `direcciòn`
 
-### 👤 usuario ###
-- `id_usuario(PK)`
-- `id_empleado(FK)`
+### 🛡️ rol 
+- `id_rol (PK)`
+- `nombre_rol`
+- `descripcion`
+
+### 👤 usuario
+- `id_usuario (PK)`
+- `id_empleado (FK)`
+- `id_rol (FK)` 
 - `usuario`
 - `clave`
+- `estado`
 
-### 🚚 proveedor ###
+### 🚚 proveedor
 - `id_proveedor (PK)`
 - `nit`
 - `teléfono`
 - `tipo_producto`
+- `direccion`
+- `email`
 
-### 🍓 sabor ###
+### 🍓 sabor
 - `id_sabor (PK)`
 - `id_producto (FK)`
 - `nombre`
 
-### 🍨 tamaños ###
+### 🍨 tamaños
 - `id_tamaño (PK)`
 - `id_producto (FK)`
 - `nombre`
 
-### 🍧 presentaciones ###
+### 🍧 presentaciones
 - `id_presentación (PK)`
 - `id_producto (FK)`
 - `nombre`
 
-### 👤 cliente ###
+### 👤 cliente
 - `id_cliente (PK)`
 - `ci`
-- `drazon_social`
+- `razon_social`
 - `teléfono`
+- `email` 
 
-### 💰 venta ###
+### 📥 compra 
+- `id_compra (PK)`
+- `id_proveedor (FK)`
+- `id_usuario (FK)`
+- `fecha`
+- `total_compra`
+
+### 🧾 compra_detalle 
+- `id_detalle_compra (PK)`
+- `id_compra (FK)`
+- `id_producto (FK)`
+- `cantidad`
+- `precio_unitario`
+- `subtotal`
+
+### 💰 venta
 - `id_venta (PK)`
 - `id_usuario (FK)`
-- `id_cliente(FK)`
+- `id_cliente (FK)`
 - `fecha`
+- `total_venta` 
+- `estado`
 
-### 📦 venta_detalle ###
+### 📦 venta_detalle
 - `id_detalle (PK)`
 - `id_venta (FK)`
 - `id_producto (FK)`
@@ -83,10 +109,11 @@ Con La funcionalidad Principal de lograr
 - `precio_unitario`
 - `total`
 
-### 🛒 pedido ###
+### 🛒 pedido
 - `id_pedido (PK)`
 - `id_cliente (FK)`
 - `id_empleado (FK)`
 - `fecha_pedido`
 - `tipo_pago`
 - `estado`
+- `total_pedido`
