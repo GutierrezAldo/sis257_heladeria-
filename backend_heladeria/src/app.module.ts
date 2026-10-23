@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RolModule } from './rol/rol.module';
 import { SaborModule } from './sabor/sabor.module';
 import { TamanosModule } from './tamanos/tamanos.module';
+import { PresentacionesModule } from './presentaciones/presentaciones.module';
 
 const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
 
@@ -26,6 +27,7 @@ const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '
     RolModule,
     SaborModule,
     TamanosModule,
+    PresentacionesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
