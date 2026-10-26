@@ -8,6 +8,7 @@ import { SaborModule } from './sabor/sabor.module';
 import { TamanosModule } from './tamanos/tamanos.module';
 import { PresentacionesModule } from './presentaciones/presentaciones.module';
 import { ProductoModule } from './producto/producto.module';
+import { EmpleadoModule } from './empleado/empleado.module';
 
 const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
 
@@ -30,6 +31,7 @@ const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '
     TamanosModule,
     PresentacionesModule,
     ProductoModule,
+    EmpleadoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
