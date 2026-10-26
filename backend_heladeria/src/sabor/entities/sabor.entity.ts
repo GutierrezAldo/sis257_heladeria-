@@ -3,17 +3,21 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Producto } from '../../producto/entities/producto.entity';
 
 @Entity('sabores')
 export class Sabor {
   @PrimaryGeneratedColumn('identity', { name: 'id_sabor' })
   id: number;
-// fk (aun no implementado)
-  @Column('int', { name: 'id_producto' })
-  idProducto: number;
+
+  @ManyToOne(() => Producto, producto => producto.sabores)
+  @JoinColumn({ name: 'id_producto' })
+  producto: Producto;
 
   @Column('varchar', { length: 50 })
   nombre: string;
