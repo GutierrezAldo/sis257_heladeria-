@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Entity('empleados')
 export class Empleado {
@@ -35,5 +37,9 @@ export class Empleado {
 
   @DeleteDateColumn({ name: 'fecha_eliminacion' })
   fechaEliminacion: Date;
+
+  @OneToOne(() => Usuario, usuario => usuario.empleado)
+  usuario: Usuario;
+
 }
 

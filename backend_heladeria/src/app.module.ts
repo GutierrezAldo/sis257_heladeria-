@@ -9,6 +9,7 @@ import { TamanosModule } from './tamanos/tamanos.module';
 import { PresentacionesModule } from './presentaciones/presentaciones.module';
 import { ProductoModule } from './producto/producto.module';
 import { EmpleadoModule } from './empleado/empleado.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
 
@@ -32,6 +33,7 @@ const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '
     PresentacionesModule,
     ProductoModule,
     EmpleadoModule,
+    UsuarioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
