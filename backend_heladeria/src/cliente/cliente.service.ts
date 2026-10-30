@@ -1,0 +1,43 @@
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { CreateClienteDto } from './dto/create-cliente.dto';
+import { UpdateClienteDto } from './dto/update-cliente.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Cliente } from './entities/cliente.entity';
+import { Repository } from 'typeorm';
+
+@Injectable()
+export class ClienteService {
+  constructor(@InjectRepository(Cliente) private clientesRepository: Repository<Cliente>) {}
+
+  async create(createClienteDto: CreateClienteDto): Promise<Cliente> {
+    let cliente = await this.clientesRepository.findOneBy({
+      ci: createClienteDto.ci,
+    });
+    if (cliente) throw new ConflictException('El cliente con este CI ya existe');
+
+    cliente = new Cliente();
+    Object.assign(cliente, createClienteDto);
+    return this.clientesRepository.save(cliente);
+  }
+
+  async findAll(): Promise<Cliente[]> {
+    return this.clientesRepository.find({ order: { razonSocial: 'ASC' } });
+  }
+
+  async findOne(id: number): Promise<Cliente> {
+    const cliente = await this.clientesRepository.findOneBy({ id });
+    if (!cliente) throw new NotFoundException('El cliente no existe');
+    return cliente;
+  }
+
+  async update(id: number, updateClienteDto: UpdateClienteDto): Promise<Cliente> {
+    const cliente = await this.findOne(id);
+    Object.assign(cliente, updateClienteDto);
+    return this.clientesRepository.save(cliente);
+  }
+
+  async remove(id: number): Promise<Cliente> {
+    const cliente = await this.findOne(id);
+    return this.clientesRepository.softRemove(cliente);
+  }
+}
