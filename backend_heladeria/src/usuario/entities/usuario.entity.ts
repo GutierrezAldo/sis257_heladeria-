@@ -5,12 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Rol } from '../../rol/entities/rol.entity';
 import { Empleado } from '../../empleado/entities/empleado.entity';
+import { Compra } from '../../compra/entities/compra.entity';
 
 @Entity('usuarios')
 export class Usuario {
@@ -42,4 +44,7 @@ export class Usuario {
   @OneToOne(() => Empleado)
   @JoinColumn({ name: 'id_empleado' })
   empleado: Empleado;
+
+  @OneToMany(() => Compra, compra => compra.usuario)
+  compras: Compra[];
 }

@@ -12,6 +12,7 @@ import { EmpleadoModule } from './empleado/empleado.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { ProveedorModule } from './proveedor/proveedor.module';
 import { ClienteModule } from './cliente/cliente.module';
+import { CompraModule } from './compra/compra.module';
 
 const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
 
@@ -38,6 +39,7 @@ const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '
     UsuarioModule,
     ProveedorModule,
     ClienteModule,
+    CompraModule,
   ],
   controllers: [AppController],
   providers: [AppService],

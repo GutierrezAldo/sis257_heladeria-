@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Compra } from '../../compra/entities/compra.entity';
 
 @Entity('proveedores')
 export class Proveedor {
@@ -36,7 +38,6 @@ export class Proveedor {
   @DeleteDateColumn({ name: 'fecha_eliminacion' })
   fechaEliminacion: Date;
 
-  // Pronto...
-  // @OneToMany(() => Compra, compra => compra.proveedor)
-  // compras: Compra[];
+  @OneToMany(() => Compra, compra => compra.proveedor)
+  compras: Compra[];
 }
