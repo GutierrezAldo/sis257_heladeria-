@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { Proveedor } from '../../proveedor/entities/proveedor.entity';
 import { Usuario } from '../../usuario/entities/usuario.entity';
+import { CompraDetalle } from '../../compra_detalle/entities/compra_detalle.entity';
 
 @Entity('compras')
 export class Compra {
@@ -46,6 +47,6 @@ export class Compra {
   @JoinColumn({ name: 'id_usuario', referencedColumnName: 'id' })
   usuario: Usuario;
 
-  // @OneToMany(() => CompraDetalle, detalle => detalle.compra)
-  // detalles: CompraDetalle[];
+  @OneToMany(() => CompraDetalle, detalle => detalle.compra)
+  detalles: CompraDetalle[];
 }
