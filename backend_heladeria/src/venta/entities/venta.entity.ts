@@ -5,11 +5,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 import { Cliente } from '../../cliente/entities/cliente.entity';
+import { VentaDetalle } from '../../venta_detalle/entities/venta_detalle.entity';
 
 @Entity('ventas')
 export class Venta {
@@ -48,6 +50,6 @@ export class Venta {
   @JoinColumn({ name: 'id_cliente', referencedColumnName: 'id' })
   cliente: Cliente;
 
-  // @OneToMany(() => VentaDetalle, detalle => detalle.venta)
-  // detalles: VentaDetalle[];
+  @OneToMany(() => VentaDetalle, detalle => detalle.venta)
+  detalles: VentaDetalle[];
 }
