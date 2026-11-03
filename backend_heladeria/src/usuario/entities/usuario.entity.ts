@@ -13,6 +13,7 @@ import {
 import { Rol } from '../../rol/entities/rol.entity';
 import { Empleado } from '../../empleado/entities/empleado.entity';
 import { Compra } from '../../compra/entities/compra.entity';
+import { Venta } from '../../venta/entities/venta.entity';
 
 @Entity('usuarios')
 export class Usuario {
@@ -47,4 +48,7 @@ export class Usuario {
 
   @OneToMany(() => Compra, compra => compra.usuario)
   compras: Compra[];
+
+  @OneToMany(() => Venta, venta => venta.usuario)
+  ventas: Venta[];
 }
