@@ -16,6 +16,7 @@ import { CompraModule } from './compra/compra.module';
 import { CompraDetalleModule } from './compra_detalle/compra_detalle.module';
 import { VentaModule } from './venta/venta.module';
 import { VentaDetalleModule } from './venta_detalle/venta_detalle.module';
+import { PedidoModule } from './pedido/pedido.module';
 
 const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
 
@@ -46,6 +47,7 @@ const isLocal = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '
     CompraDetalleModule,
     VentaModule,
     VentaDetalleModule,
+    PedidoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
