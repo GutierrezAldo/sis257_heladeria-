@@ -1,4 +1,9 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -55,5 +60,22 @@ export class UsuarioService {
   async remove(id: number): Promise<Usuario> {
     const usuario = await this.findOne(id);
     return this.usuariosRepository.softRemove(usuario);
+  }
+
+  async validate(usuarioStr: string, clave: string): Promise<Usuario> {
+    const usuarioOk = await this.usuariosRepository.findOne({
+      where: { usuario: usuarioStr },
+      select: { id: true, usuario: true, clave: true, estado: true },
+      relations: { rol: true, empleado: true } 
+    });
+
+    if (!usuarioOk) throw new NotFoundException('Usuario inexistente');
+
+    if (!(await usuarioOk?.validatePassword(clave))) {
+      throw new UnauthorizedException('Clave incorrecta');
+    }
+
+    usuarioOk.clave = '';
+    return usuarioOk;
   }
 }

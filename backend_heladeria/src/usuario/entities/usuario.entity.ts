@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -14,6 +16,7 @@ import { Rol } from '../../rol/entities/rol.entity';
 import { Empleado } from '../../empleado/entities/empleado.entity';
 import { Compra } from '../../compra/entities/compra.entity';
 import { Venta } from '../../venta/entities/venta.entity';
+import { compare, genSalt, hash } from 'bcryptjs';
 
 @Entity('usuarios')
 export class Usuario {
@@ -51,4 +54,17 @@ export class Usuario {
 
   @OneToMany(() => Venta, venta => venta.usuario)
   ventas: Venta[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    if (this.clave && !this.clave.startsWith('$2')) {
+      const salt = await genSalt();
+      this.clave = await hash(this.clave, salt);
+    }
+  }
+
+  async validatePassword(plainPassword: string): Promise<boolean> {
+    return compare(plainPassword, this.clave);
+  }
 }
