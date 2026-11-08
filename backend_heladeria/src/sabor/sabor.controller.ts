@@ -1,8 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { SaborService } from './sabor.service';
 import { CreateSaborDto } from './dto/create-sabor.dto';
 import { UpdateSaborDto } from './dto/update-sabor.dto';
 
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('sabores')
 export class SaborController {
   constructor(private readonly saborService: SaborService) {}
