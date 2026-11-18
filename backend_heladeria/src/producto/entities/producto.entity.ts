@@ -46,4 +46,8 @@ export class Producto {
 
   @OneToMany(() => Presentacion, presentacion => presentacion.producto)
   presentaciones: Presentacion[];
+
+  @Column('varchar', { length: 800, nullable: true })
+  imagen: string;
+  
 }

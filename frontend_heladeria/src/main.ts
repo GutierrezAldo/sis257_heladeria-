@@ -10,7 +10,7 @@ import 'primeflex/primeflex.min.css'
 
 import App from './App.vue'
 import router from './router'
-import { Mask } from 'primevue' /
+import { Mask } from 'primevue' 
 
 const app = createApp(App)
 

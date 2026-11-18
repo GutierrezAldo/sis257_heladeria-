@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateProductoDto {
   @ApiProperty()
@@ -26,4 +26,12 @@ export class CreateProductoDto {
   @MaxLength(20, { message: 'El estado no puede tener más de 20 caracteres' })
   @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
   readonly estado: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString({ message: 'La imagen debe ser de tipo cadena' })
+  @MaxLength(800, { message: 'La imagen no puede tener más de 800 caracteres' })
+  @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
+  readonly imagen: string;
+  
 }
