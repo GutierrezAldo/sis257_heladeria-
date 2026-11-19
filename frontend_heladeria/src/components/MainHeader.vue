@@ -27,6 +27,7 @@ const menuOpen = ref(false)
                         <RouterLink v-if="authStore.token" to="/productos" class="nav-item nav-link">Productos</RouterLink>
                         <RouterLink v-if="authStore.token" to="/clientes" class="nav-item nav-link">Clientes</RouterLink>
                         <RouterLink v-if="authStore.token" to="/empleados" class="nav-item nav-link">Empleados</RouterLink>
+                        <RouterLink v-if="authStore.token" to="/ventas" class="nav-item nav-link">Ventas</RouterLink>
                     </div>
                     <RouterLink to="/" class="navbar-brand mx-5 d-none d-lg-block">
                         <h1 class="m-0 display-4 text-primary">NOVA</h1>
