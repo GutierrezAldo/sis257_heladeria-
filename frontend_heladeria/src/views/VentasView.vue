@@ -7,7 +7,17 @@ import type { Producto } from '@/models/producto'
 import type { Cliente } from '@/models/cliente'
 import type { ItemCarrito, Venta } from '@/models/venta'
 import VentaDetalleModal from '@/components/venta/VentaDetalleModal.vue'
-import { Button, Column, DataTable, InputNumber, Select } from 'primevue'
+import {
+  Button,
+  Column,
+  DataTable,
+  InputGroup,
+  InputGroupAddon,
+  InputNumber,
+  InputText,
+  Paginator,
+  Select,
+} from 'primevue'
 
 const authStore = useAuthStore()
 
@@ -19,6 +29,19 @@ const carrito = ref<ItemCarrito[]>([])
 const procesando = ref(false)
 const mostrarDetalle = ref(false)
 const ventaSeleccionada = ref<Venta | null>(null)
+const busquedaProducto = ref('')
+const first = ref(0)
+const rows = ref(4)
+
+const productosFiltrados = computed(() => {
+  return productos.value.filter((p) =>
+    p.nombre.toLowerCase().includes(busquedaProducto.value.toLowerCase()),
+  )
+})
+
+const productosPaginados = computed(() => {
+  return productosFiltrados.value.slice(first.value, first.value + rows.value)
+})
 
 function verDetalle(venta: Venta) {
   ventaSeleccionada.value = venta
@@ -134,8 +157,19 @@ onMounted(() => {
       <!-- Catálogo de Helados -->
       <div class="col-lg-7 mb-4">
         <h4 class="mb-3">Productos Disponibles</h4>
+
+        <InputGroup class="mb-3">
+          <InputGroupAddon><i class="pi pi-search"></i></InputGroupAddon>
+          <InputText
+            v-model="busquedaProducto"
+            type="text"
+            placeholder="Buscar helado por nombre..."
+            @input="first = 0"
+          />
+        </InputGroup>
+
         <div class="row">
-          <div v-for="producto in productos" :key="producto.id" class="col-md-6 mb-4">
+          <div v-for="producto in productosPaginados" :key="producto.id" class="col-md-6 mb-4">
             <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-4 px-3 h-100 shadow-sm">
               <div class="bg-primary py-2 px-3 rounded mb-3">
                 <h5 class="font-weight-bold text-white mb-0">Bs. {{ producto.precio }}</h5>
@@ -158,7 +192,18 @@ onMounted(() => {
               />
             </div>
           </div>
+
+          <div v-if="productosPaginados.length === 0" class="col-12 text-center text-muted py-4">
+            No se encontraron productos disponibles
+          </div>
         </div>
+
+        <Paginator
+          v-if="productosFiltrados.length > rows"
+          v-model:first="first"
+          :rows="rows"
+          :totalRecords="productosFiltrados.length"
+        />
       </div>
 
       <!-- Carrito / Ticket -->
