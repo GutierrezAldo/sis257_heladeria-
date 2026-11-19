@@ -2,7 +2,7 @@
 import type { Producto } from '@/models/producto'
 import { computed, onMounted, ref } from 'vue'
 import http from '@/plugins/axios'
-import { Button, Dialog, InputGroup, InputGroupAddon, InputText } from 'primevue'
+import { Button, Column, DataTable, Dialog, InputGroup, InputGroupAddon, InputText } from 'primevue'
 
 const ENDPOINT = 'productos'
 const productos = ref<Producto[]>([])
@@ -50,50 +50,26 @@ defineExpose({ obtenerLista })
       <InputGroupAddon><i class="pi pi-search"></i></InputGroupAddon>
       <InputText v-model="busqueda" type="text" placeholder="Buscar por nombre o estado" />
     </InputGroup>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nro.</th>
-          <th>Nombre</th>
-          <th>Precio (Bs.)</th>
-          <th>Stock</th>
-          <th>Estado</th>
-          <th>Imagen</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(producto, index) in productosFiltrados" :key="producto.id">
-          <td>{{ index + 1 }}</td>
-          <td>{{ producto.nombre }}</td>
-          <td>{{ producto.precio }}</td>
-          <td>{{ producto.stock }}</td>
-          <td>{{ producto.estado }}</td>
-          <td>
-            <img
-              v-if="producto.imagen"
-              :src="producto.imagen"
-              alt="imagen producto"
-              width="70"
-              height="70"
-              style="object-fit: cover"
-            />
-          </td>
-          <td>
-            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(producto)" />
-            <Button
-              icon="pi pi-trash"
-              aria-label="Eliminar"
-              text
-              @click="mostrarEliminarConfirm(producto)"
-            />
-          </td>
-        </tr>
-        <tr v-if="productosFiltrados.length === 0">
-          <td colspan="7" class="text-center">No se encontraron resultados</td>
-        </tr>
-      </tbody>
-    </table>
+    <DataTable :value="productosFiltrados" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20]" stripedRows>
+      <Column header="Nro.">
+        <template #body="{ index }">{{ index + 1 }}</template>
+      </Column>
+      <Column field="nombre" header="Nombre" />
+      <Column field="precio" header="Precio (Bs.)" />
+      <Column field="stock" header="Stock" />
+      <Column field="estado" header="Estado" />
+      <Column header="Imagen">
+        <template #body="{ data }">
+          <img v-if="data.imagen" :src="data.imagen" alt="imagen" width="60" height="60" style="object-fit: cover" />
+        </template>
+      </Column>
+      <Column header="Acciones">
+        <template #body="{ data }">
+          <Button icon="pi pi-pencil" text @click="emitirEdicion(data)" />
+          <Button icon="pi pi-trash" text @click="mostrarEliminarConfirm(data)" />
+        </template>
+      </Column>
+    </DataTable>
     <Dialog
       v-model:visible="mostrarConfirmDialog"
       header="Confirmar Eliminación"

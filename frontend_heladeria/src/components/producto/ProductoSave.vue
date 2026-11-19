@@ -2,7 +2,9 @@
 import type { Producto } from '@/models/producto'
 import { computed, ref, watch } from 'vue'
 import http from '@/plugins/axios'
-import { Button, Dialog, InputNumber, InputText, Textarea } from 'primevue'
+import { Button, Dialog, InputNumber, InputText, Select, Textarea } from 'primevue'
+
+const estados = ['ACTIVO', 'INACTIVO']
 
 const ENDPOINT = 'productos'
 const props = defineProps({
@@ -86,12 +88,12 @@ async function handleSave() {
       </div>
       <div class="flex items-center gap-4 mb-4">
         <label for="estado" class="font-semibold w-3">Estado</label>
-        <InputText
+        <Select
           id="estado"
           v-model="producto.estado"
+          :options="estados"
+          placeholder="Seleccione un estado"
           class="flex-auto"
-          placeholder="ACTIVO"
-          autocomplete="off"
         />
       </div>
       <div class="flex items-center gap-4 mb-4">

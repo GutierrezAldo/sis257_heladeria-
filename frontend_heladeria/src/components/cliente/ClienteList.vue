@@ -2,7 +2,7 @@
 import type { Cliente } from '@/models/cliente'
 import { computed, onMounted, ref } from 'vue'
 import http from '@/plugins/axios'
-import { Button, Dialog, InputGroup, InputGroupAddon, InputText } from 'primevue'
+import { Button, Column, DataTable, Dialog, InputGroup, InputGroupAddon, InputText } from 'primevue'
 
 const ENDPOINT = 'clientes'
 const clientes = ref<Cliente[]>([])
@@ -51,39 +51,21 @@ defineExpose({ obtenerLista })
       <InputGroupAddon><i class="pi pi-search"></i></InputGroupAddon>
       <InputText v-model="busqueda" type="text" placeholder="Buscar por CI, razón social o email" />
     </InputGroup>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nro.</th>
-          <th>CI</th>
-          <th>Razón Social</th>
-          <th>Teléfono</th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(cliente, index) in clientesFiltrados" :key="cliente.id">
-          <td>{{ index + 1 }}</td>
-          <td>{{ cliente.ci }}</td>
-          <td>{{ cliente.razonSocial }}</td>
-          <td>{{ cliente.telefono }}</td>
-          <td>{{ cliente.email }}</td>
-          <td>
-            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(cliente)" />
-            <Button
-              icon="pi pi-trash"
-              aria-label="Eliminar"
-              text
-              @click="mostrarEliminarConfirm(cliente)"
-            />
-          </td>
-        </tr>
-        <tr v-if="clientesFiltrados.length === 0">
-          <td colspan="6" class="text-center">No se encontraron resultados</td>
-        </tr>
-      </tbody>
-    </table>
+    <DataTable :value="clientesFiltrados" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20]" stripedRows>
+      <Column header="Nro.">
+        <template #body="{ index }">{{ index + 1 }}</template>
+      </Column>
+      <Column field="ci" header="CI" />
+      <Column field="razonSocial" header="Razón Social" />
+      <Column field="telefono" header="Teléfono" />
+      <Column field="email" header="Email" />
+      <Column header="Acciones">
+        <template #body="{ data }">
+          <Button icon="pi pi-pencil" text @click="emitirEdicion(data)" />
+          <Button icon="pi pi-trash" text @click="mostrarEliminarConfirm(data)" />
+        </template>
+      </Column>
+    </DataTable>
     <Dialog
       v-model:visible="mostrarConfirmDialog"
       header="Confirmar Eliminación"

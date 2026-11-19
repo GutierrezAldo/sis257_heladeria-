@@ -7,7 +7,7 @@ import type { Producto } from '@/models/producto'
 import type { Cliente } from '@/models/cliente'
 import type { ItemCarrito, Venta } from '@/models/venta'
 import VentaDetalleModal from '@/components/venta/VentaDetalleModal.vue'
-import { Button, InputNumber, Select } from 'primevue'
+import { Button, Column, DataTable, InputNumber, Select } from 'primevue'
 
 const authStore = useAuthStore()
 
@@ -236,40 +236,25 @@ onMounted(() => {
     <!-- Historial de Ventas -->
     <div class="mt-5">
       <h3 class="mb-3">Historial de Ventas</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Nro.</th>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Vendedor</th>
-            <th>Total (Bs.)</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(venta, index) in ventas" :key="venta.id">
-            <td>{{ index + 1 }}</td>
-            <td>{{ venta.fecha }}</td>
-            <td>{{ venta.cliente?.razonSocial || 'S/N' }}</td>
-            <td>{{ venta.usuario?.usuario || '-' }}</td>
-            <td>{{ venta.totalVenta }}</td>
-            <td>{{ venta.estado }}</td>
-            <td>
-              <Button
-                icon="pi pi-eye"
-                aria-label="Ver Detalle"
-                text
-                @click="verDetalle(venta)"
-              />
-            </td>
-          </tr>
-          <tr v-if="ventas.length === 0">
-            <td colspan="7" class="text-center">No hay ventas registradas aún</td>
-          </tr>
-        </tbody>
-      </table>
+      <DataTable :value="ventas" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20]" stripedRows>
+        <Column header="Nro.">
+          <template #body="{ index }">{{ index + 1 }}</template>
+        </Column>
+        <Column field="fecha" header="Fecha" />
+        <Column header="Cliente">
+          <template #body="{ data }">{{ data.cliente?.razonSocial || 'S/N' }}</template>
+        </Column>
+        <Column header="Vendedor">
+          <template #body="{ data }">{{ data.usuario?.usuario || '-' }}</template>
+        </Column>
+        <Column field="totalVenta" header="Total (Bs.)" />
+        <Column field="estado" header="Estado" />
+        <Column header="Acciones">
+          <template #body="{ data }">
+            <Button icon="pi pi-eye" text @click="verDetalle(data)" />
+          </template>
+        </Column>
+      </DataTable>
     </div>
 
     <VentaDetalleModal

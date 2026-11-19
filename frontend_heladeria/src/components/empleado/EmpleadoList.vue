@@ -2,7 +2,7 @@
 import type { Empleado } from '@/models/empleado'
 import { computed, onMounted, ref } from 'vue'
 import http from '@/plugins/axios'
-import { Button, Dialog, InputGroup, InputGroupAddon, InputText } from 'primevue'
+import { Button, Column, DataTable, Dialog, InputGroup, InputGroupAddon, InputText } from 'primevue'
 
 const ENDPOINT = 'empleados'
 const empleados = ref<Empleado[]>([])
@@ -56,46 +56,22 @@ defineExpose({ obtenerLista })
         placeholder="Buscar por nombre, apellido, cargo o teléfono"
       />
     </InputGroup>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nro.</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Cargo</th>
-          <th>Teléfono</th>
-          <th>Dirección</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(empleado, index) in empleadosFiltrados" :key="empleado.id">
-          <td>{{ index + 1 }}</td>
-          <td>{{ empleado.nombre }}</td>
-          <td>{{ empleado.apellido }}</td>
-          <td>{{ empleado.cargo }}</td>
-          <td>{{ empleado.telefono }}</td>
-          <td>{{ empleado.direccion }}</td>
-          <td>
-            <Button
-              icon="pi pi-pencil"
-              aria-label="Editar"
-              text
-              @click="emitirEdicion(empleado)"
-            />
-            <Button
-              icon="pi pi-trash"
-              aria-label="Eliminar"
-              text
-              @click="mostrarEliminarConfirm(empleado)"
-            />
-          </td>
-        </tr>
-        <tr v-if="empleadosFiltrados.length === 0">
-          <td colspan="7" class="text-center">No se encontraron resultados</td>
-        </tr>
-      </tbody>
-    </table>
+    <DataTable :value="empleadosFiltrados" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20]" stripedRows>
+      <Column header="Nro.">
+        <template #body="{ index }">{{ index + 1 }}</template>
+      </Column>
+      <Column field="nombre" header="Nombre" />
+      <Column field="apellido" header="Apellido" />
+      <Column field="cargo" header="Cargo" />
+      <Column field="telefono" header="Teléfono" />
+      <Column field="direccion" header="Dirección" />
+      <Column header="Acciones">
+        <template #body="{ data }">
+          <Button icon="pi pi-pencil" text @click="emitirEdicion(data)" />
+          <Button icon="pi pi-trash" text @click="mostrarEliminarConfirm(data)" />
+        </template>
+      </Column>
+    </DataTable>
     <Dialog
       v-model:visible="mostrarConfirmDialog"
       header="Confirmar Eliminación"

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min, MaxLength } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min, MaxLength, IsIn } from 'class-validator';
 
 export class CreateProductoDto {
   @ApiProperty()
@@ -26,8 +26,10 @@ export class CreateProductoDto {
   @IsNotEmpty({ message: 'El estado es obligatorio' })
   @IsString({ message: 'El estado debe ser de tipo cadena' })
   @MaxLength(20, { message: 'El estado no puede tener más de 20 caracteres' })
+  @IsIn(['ACTIVO', 'INACTIVO'], { message: 'El estado debe ser ACTIVO o INACTIVO' })
   @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
   readonly estado: string;
+
 
   @ApiProperty()
   @IsOptional()
