@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsInt, IsNumber } from 'class-validator';
+import { IsDefined, IsInt, IsNumber, IsPositive } from 'class-validator';
 
 export class CreateCompraDetalleDto {
   @ApiProperty()
@@ -15,15 +15,18 @@ export class CreateCompraDetalleDto {
   @ApiProperty()
   @IsDefined({ message: 'La cantidad es obligatoria' })
   @IsInt({ message: 'La cantidad debe ser un número entero' })
+  @IsPositive({ message: 'La cantidad debe ser mayor a 0' })
   readonly cantidad: number;
 
   @ApiProperty()
   @IsDefined({ message: 'El precio unitario es obligatorio' })
   @IsNumber({}, { message: 'El precio unitario debe ser un número' })
+  @IsPositive({ message: 'El precio unitario debe ser mayor a 0' })
   readonly precioUnitario: number;
 
   @ApiProperty()
   @IsDefined({ message: 'El subtotal es obligatorio' })
   @IsNumber({}, { message: 'El subtotal debe ser un número' })
+  @IsPositive({ message: 'El subtotal debe ser mayor a 0' })
   readonly subtotal: number;
 }

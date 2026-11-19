@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min, MaxLength } from 'class-validator';
 
 export class CreateProductoDto {
   @ApiProperty()
@@ -13,11 +13,13 @@ export class CreateProductoDto {
   @ApiProperty()
   @IsNotEmpty({ message: 'El precio es obligatorio' })
   @IsNumber({}, { message: 'El precio debe ser un número' })
+  @IsPositive({ message: 'El precio debe ser mayor a 0' })
   readonly precio: number;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El stock es obligatorio' })
   @IsInt({ message: 'El stock debe ser un número entero' })
+  @Min(0, { message: 'El stock no puede ser negativo' })
   readonly stock: number;
 
   @ApiProperty()

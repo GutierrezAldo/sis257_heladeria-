@@ -10144,3 +10144,9 @@ h6,
     border-right: none !important;
   }
 }
+
+:root {
+  --p-primary-color: #F195B2;
+  --p-primary-hover-color: #e67c9d;
+  --p-primary-active-color: #d9658a;
+}
