@@ -195,7 +195,7 @@ onMounted(() => {
                     v-model="item.cantidad"
                     :min="1"
                     :max="item.producto.stock"
-                    inputStyle="width: 60px; padding: 4px;"
+                    :inputStyle="{ width: '60px', padding: '4px' }"
                     @update:modelValue="actualizarSubtotal(item)"
                   />
                 </td>

@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <p class="m-0">&copy; <a href="#">Domain</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+                    <p class="m-0">&copy; 2026 Heladería NOVA - SIS257
                     </p>
                 </div>
             </div>

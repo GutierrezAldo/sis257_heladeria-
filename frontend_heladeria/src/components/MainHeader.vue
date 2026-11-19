@@ -34,6 +34,9 @@ const menuOpen = ref(false)
                     </RouterLink>
                     <div class="navbar-nav mr-auto py-0">
                         <RouterLink v-if="!authStore.token" to="/login" class="nav-item nav-link">Iniciar sesión</RouterLink>
+                        <span v-if="authStore.token" class="nav-item nav-link text-primary font-weight-bold">
+                            <i class="pi pi-user mr-1"></i> {{ authStore.user }}
+                        </span>
                         <button v-else type="button" class="nav-item nav-link btn btn-link" @click="authStore.logout()">
                             Cerrar sesión
                         </button>

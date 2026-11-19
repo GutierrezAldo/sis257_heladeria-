@@ -50,7 +50,7 @@ const slide = ref(0)
     <div class="container py-5">
       <div class="row justify-content-center">
         <div class="col-lg-7">
-          <h1 class="section-title position-relative text-center mb-5">Traditional & Delicious Ice Cream Since 1950</h1>
+          <h1 class="section-title position-relative text-center mb-5">Helados tradicionales y deliciosos desde 1950</h1>
         </div>
       </div>
       <div class="row">
@@ -197,7 +197,7 @@ const slide = ref(0)
   <div class="container-fluid my-5 py-5 px-0">
     <div class="row justify-content-center m-0">
       <div class="col-lg-5">
-        <h1 class="section-title position-relative text-center mb-5">Delicious Ice Cream Made From Our Very Own Organic Milk</h1>
+        <h1 class="section-title position-relative text-center mb-5">Helados deliciosos elaborados con nuestra leche orgánica</h1>
       </div>
     </div>
     <div class="row m-0 portfolio-container">
@@ -339,7 +339,7 @@ const slide = ref(0)
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-6">
-          <h1 class="section-title position-relative mb-5">Experienced & Most Famous Ice Cream Chefs</h1>
+          <h1 class="section-title position-relative mb-5">Nuestro equipo de maestros heladeros</h1>
         </div>
         <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
       </div>
@@ -352,7 +352,7 @@ const slide = ref(0)
                 <img class="rounded-circle w-100 h-100" src="/images/team-1.jpg" style="object-fit: cover;">
               </div>
               <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
+                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Ana Morales</h3>
                 <h6 class="text-uppercase text-muted mb-4">Designation</h6>
                 <div class="d-flex justify-content-center pt-1">
                   <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
@@ -368,7 +368,7 @@ const slide = ref(0)
                 <img class="rounded-circle w-100 h-100" src="/images/team-2.jpg" style="object-fit: cover;">
               </div>
               <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
+                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Diego Flores</h3>
                 <h6 class="text-uppercase text-muted mb-4">Designation</h6>
                 <div class="d-flex justify-content-center pt-1">
                   <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
@@ -384,7 +384,7 @@ const slide = ref(0)
                 <img class="rounded-circle w-100 h-100" src="/images/team-3.jpg" style="object-fit: cover;">
               </div>
               <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
+                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Sofía Vargas</h3>
                 <h6 class="text-uppercase text-muted mb-4">Designation</h6>
                 <div class="d-flex justify-content-center pt-1">
                   <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
@@ -400,7 +400,7 @@ const slide = ref(0)
                 <img class="rounded-circle w-100 h-100" src="/images/team-4.jpg" style="object-fit: cover;">
               </div>
               <div class="position-relative text-center bg-light rounded px-4 py-5" style="margin-top: -100px;">
-                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Full Name</h3>
+                <h3 class="font-weight-bold mt-5 mb-3 pt-5">Luis Rojas</h3>
                 <h6 class="text-uppercase text-muted mb-4">Designation</h6>
                 <div class="d-flex justify-content-center pt-1">
                   <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
